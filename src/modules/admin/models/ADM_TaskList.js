@@ -56,7 +56,7 @@ module.exports = (sequelize) => {
     });
     ADM_TaskList.belongsTo(models.ADM_ProcessGroups, {
       foreignKey: "GroupId",
-      as: "processGroup",
+      as: "processGroups",
     });
     ADM_TaskList.belongsTo(models.ADM_Module, {
       foreignKey: "ModuleId",

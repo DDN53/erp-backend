@@ -3,11 +3,13 @@ const Sequelize = require("sequelize");
 const sequelize = require("../../../../config/database");
 
 const models = {
-  ADM_ServerUser: require("./ADM_ServerUser")(sequelize, Sequelize.DataTypes),
-  ADM_Module: require("./ADM_Module")(sequelize, Sequelize.DataTypes),
-  ADM_TaskList: require("./ADM_TaskList")(sequelize, Sequelize.DataTypes),
-  ADM_Process: require("./ADM_Process")(sequelize, Sequelize.DataTypes),
-  ADM_ProcessGroups: require("./ADM_ProcessGroups")(
+  // ADM_Module: require("./ADM_Module")(sequelize, Sequelize.DataTypes),
+  // ADM_ProcessGroups: require("./ADM_ProcessGroups")(
+  //   sequelize,
+  //   Sequelize.DataTypes
+  // ),
+  AspNetUsers: require("./aspnet_Users")(sequelize, Sequelize.DataTypes),
+  AspNetMembership: require("./aspnet_Membership")(
     sequelize,
     Sequelize.DataTypes
   ),

@@ -5,10 +5,10 @@ const helmet = require("helmet");
 const bcrypt = require("bcryptjs");
 
 const app = express();
-// const userRoutes = require('./routes/userRoutes');
+
 const adminRoutes = require("./src/routes/adminRoutes");
 const newadminRoutes = require("./src/modules/admin/routers/newadminRoutes");
-const authRoutes = require("./src/modules/admin/routers/authRoutes");
+const newauthRoutes = require("./src/modules/auth/routers/authRoutes");
 
 // Middleware
 app.use(cors());
@@ -16,10 +16,9 @@ app.use(helmet());
 app.use(express.json());
 
 // Routes
-// app.use('/api/users', userRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/admin", adminRoutes);
-app.use("/api/newadmin", newadminRoutes);
+app.use("/api/auth", newauthRoutes);
+// app.use("/api/admin", adminRoutes);
+app.use("/api/admin", newadminRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;

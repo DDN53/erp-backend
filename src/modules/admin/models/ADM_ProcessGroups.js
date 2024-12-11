@@ -46,6 +46,10 @@ module.exports = (sequelize) => {
       foreignKey: "ModuleId",
       as: "module",
     });
+    ADM_ProcessGroups.hasMany(models.ADM_Process, {
+      foreignKey: "GroupId",
+      as: "process",
+    });
   };
 
   return ADM_ProcessGroups;
