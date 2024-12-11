@@ -7,7 +7,6 @@ module.exports = (sequelize) => {
       Id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
         allowNull: false,
       },
       EmpNumber: {
@@ -106,41 +105,20 @@ module.exports = (sequelize) => {
     }
   );
 
+  // Define associations
   MDM_Employee.associate = (models) => {
-    // Define relationships with other models here, if necessary.
+    // MDM_Employee belongs to MDM_DesignationJobRole
     MDM_Employee.belongsTo(models.MDM_DesignationJobRole, {
       foreignKey: "JobRoleId",
       as: "jobRole",
     });
+
+    // MDM_Employee belongs to MDM_OfficeActType
     MDM_Employee.belongsTo(models.MDM_OfficeActType, {
       foreignKey: "OffcActTypeId",
       as: "officeActType",
     });
-    MDM_Employee.belongsTo(models.MDM_SalaryScale, {
-      foreignKey: "SalaryScaleId",
-      as: "salaryScale",
-    });
-    MDM_Employee.belongsTo(models.MDM_EmployeeType, {
-      foreignKey: "EmpTypeId",
-      as: "employeeType",
-    });
-    MDM_Employee.belongsTo(models.MDM_EmployeeStatus, {
-      foreignKey: "EmpStatusId",
-      as: "employeeStatus",
-    });
-    MDM_Employee.belongsTo(models.MDM_Department, {
-      foreignKey: "DeptId",
-      as: "department",
-    });
-    MDM_Employee.belongsTo(models.MDM_Location, {
-      foreignKey: "LocationId",
-      as: "location",
-    });
-    MDM_Employee.belongsTo(models.MDM_CostCenter, {
-      foreignKey: "CostCenterId",
-      as: "costCenter",
-    });
-  };
+ };
 
   return MDM_Employee;
 };

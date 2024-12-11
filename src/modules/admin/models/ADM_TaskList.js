@@ -62,6 +62,10 @@ module.exports = (sequelize) => {
       foreignKey: "ModuleId",
       as: "module",
     });
+    ADM_TaskList.hasMany(models.ADM_TaskUser_Mapping, {
+      foreignKey: "TaskId",
+      as: "taskMappings",
+    });
   };
 
   return ADM_TaskList;
