@@ -8,12 +8,12 @@ const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
 
 // Sign-in Controller
 const signIn = async (req, res) => {
-  const { username, password } = req.body;
+  const { userName, password } = req.body;
 
   try {
     // Find user by username
     const user = await AspNetUsers.findOne({
-      where: { username },
+      where: { userName },
       include: {
         model: AspNetMembership,
         as: "membership",
@@ -45,14 +45,22 @@ const signIn = async (req, res) => {
     // Create JWT token
     const token = jwt.sign(
       {
-        UserId: user.UserId,
-        UserName: user.UserName,
+        nameid: user.UserName,
+        // UserId: user.UserId,
+        // UserName: user.UserName,
       },
       JWT_SECRET,
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ token, message: "Sign-in successful" });
+    // res.status(200).json({ token, message: "Sign-in successful" });
+    res.status(200).json({
+      type: "",
+      title: "Authorized",
+      status: "200",
+      traceId: "",
+      data: token,
+    });
   } catch (error) {
     console.error("Error during sign-in:", error);
     res.status(500).json({ error: "Sign-in failed" });

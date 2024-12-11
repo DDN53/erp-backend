@@ -5,6 +5,8 @@ const {
   ADM_ServerUser,
   ADM_Process,
   ADM_TaskList,
+  ADM_TaskUser_Mapping,
+  MDM_Employee,
 } = require("../models");
 const crypto = require("crypto");
 
@@ -182,10 +184,85 @@ const getProcessGroupsByModuleId = async (req, res) => {
   }
 };
 
+const getAssignedGroupedTasks = async (req, res) => {
+  const { employeeNumber } = req.params;
+
+  try {
+    // Find the employee ID based on the employee number
+    const employee = await MDM_Employee.findOne({
+      where: { EmpNumber: employeeNumber },
+      attributes: ["Id"],
+    });
+
+    if (!employee) {
+      return res.status(404).json({ message: "Employee not found" });
+    }
+
+    // Query the assigned grouped tasks
+    const result = await ADM_Module.findAll({
+      include: [
+        {
+          model: ADM_ProcessGroups,
+          as: "processGroups",
+          include: [
+            {
+              model: ADM_Process,
+              as: "process",
+              include: [
+                {
+                  model: ADM_TaskList,
+                  as: "task",
+                  include: [
+                    {
+                      model: ADM_TaskUser_Mapping,
+                      as: "taskMappings",
+                      where: { EmpId: employee.Id },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    // Format the result as needed
+    const output = result
+      .map((module) => {
+        return module.processGroups.map((group) => {
+          return group.process.map((process) => {
+            return {
+              moduleId: module.ModuleId,
+              groupId: group.GroupId,
+              groupName: group.GroupName,
+              processId: process.ProcessId,
+              processName: process.ProcessName,
+              tasks: process.task
+                .sort((a, b) => a.OrderById - b.OrderById)
+                .map((task) => ({
+                  taskId: task.TaskId,
+                  taskName: task.TaskName,
+                  orderById: task.OrderById,
+                })),
+            };
+          });
+        });
+      })
+      .flat(2);
+
+    res.status(200).json(output);
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   adminSignIn,
   getAllModules,
   getAllProcessGroups,
   getProcessGroupsByModuleId,
   AdminGetAllGroupTasks,
+  getAssignedGroupedTasks,
 };
