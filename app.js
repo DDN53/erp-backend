@@ -9,6 +9,7 @@ const app = express();
 const adminRoutes = require("./src/routes/adminRoutes");
 const newadminRoutes = require("./src/modules/admin/routers/newadminRoutes");
 const newauthRoutes = require("./src/modules/auth/routers/authRoutes");
+const commamRoutes = require("./src/modules/admin/routers/commanRoutes");
 
 // Middleware
 app.use(cors());
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use("/api/auth", newauthRoutes);
 // app.use("/api/admin", adminRoutes);
 app.use("/api/admin", newadminRoutes);
+app.use("/api/comman", commamRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;
