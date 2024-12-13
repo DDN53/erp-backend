@@ -10,6 +10,7 @@ const adminRoutes = require("./src/routes/adminRoutes");
 const newadminRoutes = require("./src/modules/admin/routers/newadminRoutes");
 const newauthRoutes = require("./src/modules/auth/routers/authRoutes");
 const commamRoutes = require("./src/modules/admin/routers/commanRoutes");
+const auditRoutes = require("./src/modules/audit/routes/auditRoutes");
 
 // Middleware
 app.use(cors());
@@ -21,6 +22,7 @@ app.use("/api/auth", newauthRoutes);
 // app.use("/api/admin", adminRoutes);
 app.use("/api/admin", newadminRoutes);
 app.use("/api/comman", commamRoutes);
+app.use("/api/audit", auditRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;
