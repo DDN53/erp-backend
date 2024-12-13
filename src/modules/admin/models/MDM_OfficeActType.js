@@ -30,18 +30,21 @@ module.exports = (sequelize) => {
     },
     {
       tableName: "MDM_OfficeActType",
-      timestamps: false, // Assuming no timestamps in the table
+      timestamps: false,
     }
   );
 
   // Define associations
   MDM_OfficeActType.associate = (models) => {
-    // Many OfficeActTypes belong to one Circular
     MDM_OfficeActType.belongsTo(models.MDM_Circular, {
       foreignKey: "CircularId",
       as: "circular",
     });
 
+    MDM_OfficeActType.hasMany(models.MDM_Employee, {
+      foreignKey: "OffcActTypeId",
+      as: "employees",
+    });
     // Example: If OfficeActType has relations with another entity
     // MDM_OfficeActType.hasMany(models.OfficeAction, {
     //   foreignKey: "OfficeActTypeId",

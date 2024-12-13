@@ -45,19 +45,24 @@ module.exports = (sequelize) => {
     }
   );
 
-  // Associations
   MDM_SHR_WorkLocation.associate = (models) => {
-    // MDM_SHR_WorkLocation belongs to MDM_SHR_District
-    MDM_SHR_WorkLocation.belongsTo(models.MDM_SHR_District, {
-      foreignKey: "DistrictId", // Foreign key field in MDM_SHR_WorkLocation
-      as: "district", // Alias for the relationship
+    // MDM_SHR_WorkLocation.belongsTo(models.MDM_SHR_District, {
+    //   foreignKey: "DistrictId",
+    //   as: "district",
+    // });
+
+    MDM_SHR_WorkLocation.belongsTo(models.MDM_SHR_WorkLocationType, {
+      foreignKey: "LocationTypeId",
+      as: "locationType",
     });
 
-    // MDM_SHR_WorkLocation belongs to MDM_SHR_WorkLocationType
-    MDM_SHR_WorkLocation.belongsTo(models.MDM_SHR_WorkLocationType, {
-      foreignKey: "LocationTypeId", // Foreign key field in MDM_SHR_WorkLocation
-      as: "locationType", // Alias for the relationship
-    });
+    MDM_SHR_WorkLocation.hasMany(
+      models.MDM_SHR_WorkLocation_CostCentre_Mapping,
+      {
+        foreignKey: "LocationId",
+        as: "costCentreMappings",
+      }
+    );
   };
 
   return MDM_SHR_WorkLocation;

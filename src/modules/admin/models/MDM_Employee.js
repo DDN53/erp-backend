@@ -107,18 +107,25 @@ module.exports = (sequelize) => {
 
   // Define associations
   MDM_Employee.associate = (models) => {
-    // MDM_Employee belongs to MDM_DesignationJobRole
-    MDM_Employee.belongsTo(models.MDM_DesignationJobRole, {
-      foreignKey: "JobRoleId",
-      as: "jobRole",
-    });
+    // MDM_Employee.belongsTo(models.MDM_DesignationJobRole, {
+    //   foreignKey: "JobRoleId",
+    //   as: "jobRole",
+    // });
 
-    // MDM_Employee belongs to MDM_OfficeActType
     MDM_Employee.belongsTo(models.MDM_OfficeActType, {
       foreignKey: "OffcActTypeId",
       as: "officeActType",
     });
- };
+    // MDM_Employee.belongsTo(models.MDM_Department, {
+    //   foreignKey: "DeptId",
+    //   as: "department",
+    // });
+
+    // MDM_Employee.belongsTo(models.MDM_Location, {
+    //   foreignKey: "LocationId",
+    //   as: "location",
+    // });
+  };
 
   return MDM_Employee;
 };

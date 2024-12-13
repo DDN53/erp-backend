@@ -59,14 +59,14 @@ module.exports = (sequelize) => {
       foreignKey: "OffcActTypeId",
       as: "officeActType",
     });
-    MDM_Designation.belongsTo(models.MDM_DesignationCategory, {
-      foreignKey: "DsgnCtgryId",
-      as: "designationCategory",
-    });
-    MDM_Designation.belongsTo(models.MDM_DesignationSummaryCategory, {
-      foreignKey: "DsgnSumCtgryId",
-      as: "designationSummaryCategory",
-    });
+    // MDM_Designation.belongsTo(models.MDM_DesignationCategory, {
+    //   foreignKey: "DsgnCtgryId",
+    //   as: "designationCategory",
+    // });
+    // MDM_Designation.belongsTo(models.MDM_DesignationSummaryCategory, {
+    //   foreignKey: "DsgnSumCtgryId",
+    //   as: "designationSummaryCategory",
+    // });
     MDM_Designation.belongsTo(models.MDM_BoardGrade, {
       foreignKey: "BoardGradeId",
       as: "boardGrade",

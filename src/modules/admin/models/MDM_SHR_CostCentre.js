@@ -46,13 +46,16 @@ module.exports = (sequelize) => {
     }
   );
 
-  // Associations
   MDM_SHR_CostCentre.associate = (models) => {
-    // Define a foreign key relationship between MDM_SHR_CostCentre and MDM_SHR_Consolidation_Locations
-    MDM_SHR_CostCentre.belongsTo(models.MDM_SHR_Consolidation_Locations, {
-      foreignKey: "ConsolidationLocationID", // The foreign key field in MDM_SHR_CostCentre
-      as: "consolidationLocation", // Alias for the relationship
+    MDM_SHR_CostCentre.hasMany(models.MDM_SHR_WorkLocation_CostCentre_Mapping, {
+      foreignKey: "CostCentreId",
+      as: "workLocationMappings",
     });
+
+    // MDM_SHR_CostCentre.belongsTo(models.MDM_SHR_Consolidation_Locations, {
+    //   foreignKey: "ConsolidationLocationID",
+    //   as: "consolidationLocation",
+    // });
   };
 
   return MDM_SHR_CostCentre;

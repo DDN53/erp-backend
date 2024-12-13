@@ -34,12 +34,10 @@ module.exports = (sequelize) => {
     }
   );
 
-  // Associations
   MDM_SHR_District.associate = (models) => {
-    // Define a foreign key relationship between MDM_SHR_District and MDM_SHR_Province
     MDM_SHR_District.belongsTo(models.MDM_SHR_Province, {
-      foreignKey: "ProvinceId", // The foreign key field in MDM_SHR_District
-      as: "province", // Alias for the relationship
+      foreignKey: "ProvinceId",
+      as: "province",
     });
   };
 

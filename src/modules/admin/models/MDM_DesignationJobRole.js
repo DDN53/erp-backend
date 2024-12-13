@@ -29,17 +29,17 @@ module.exports = (sequelize) => {
     },
     {
       tableName: "MDM_DesignationJobRole",
-      timestamps: false, // Assuming no timestamp fields exist
+      timestamps: false,
     }
   );
 
   // Define Associations
   MDM_DesignationJobRole.associate = (models) => {
-    // Example association: If job roles relate to employees
-    // MDM_DesignationJobRole.hasMany(models.Employee, {
-    //   foreignKey: 'JobRoleId',
-    //   as: 'employees',
+    // MDM_DesignationJobRole.hasMany(models.MDM_Employee, {
+    //   foreignKey: "JobRoleId",
+    //   as: "employees",
     // });
+    
     // Example association: If this table has a many-to-many relationship
     // MDM_DesignationJobRole.belongsToMany(models.Designation, {
     //   through: 'DesignationJobRoleMapping',
