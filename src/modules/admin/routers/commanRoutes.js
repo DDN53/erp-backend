@@ -9,9 +9,9 @@ const {
   getEmployeeNew,
 } = require("../controllers/commanController");
 
-router.get("/locations", getAllLocations);
-router.get("/costCenters", getAllCostCenters);
-router.get("/costCentersByLocation/:locationId", getCostCentersByLocation);
+router.get("/GetAllLocations", getAllLocations);
+router.get("/GetAllCostCenters", getAllCostCenters);
+router.get("/GetLocationWiseCostCenters/:locationId", getCostCentersByLocation);
 router.get("/allEmployees", getAllEmployees);
 router.get("/employee/:empNumber", getEmployee);
 router.get("/employeeNew/:empNo", getEmployeeNew);
