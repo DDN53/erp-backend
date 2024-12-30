@@ -20,11 +20,11 @@ const GWM_WaterQuality = sequelize.define('GWM_WaterQuality', {
     },
     region: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     rsc: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     sampleDate: {
       type: DataTypes.DATE,
