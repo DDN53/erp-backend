@@ -21,35 +21,33 @@ const waterQualityController = {
         volume,
         weatherCondition
       } = req.body;
-  
-      // Create a new entry in the database, setting defaults for non-required fields
+
+      // Create a new entry in the database with the received data
       const waterQualityData = await WaterQuality.create({
-        collectorName: collectorName || null, // Default to null if not provided
-        designation: designation || null,
-        prepareDate: prepareDate || null,
-        references: references || null,
-        region: region || null,
-        rsc: rsc || null,
-        sampleDate: sampleDate || null,
-        sampleGroup: sampleGroup || null,
-        sampleNumber: sampleNumber || null,
-        samplePointName: samplePointName || null,
-        source: source || null,
-        time: time || null,
-        volume: volume || null,
-        weatherCondition: weatherCondition || null,
+        collectorName,
+        designation,
+        prepareDate,
+        references,
+        region,
+        rsc,
+        sampleDate,
+        sampleGroup,
+        sampleNumber,
+        samplePointName,
+        source,
+        time,
+        volume,
+        weatherCondition
       });
-  
-      // Return a success response with the created data
+
       res.status(201).json({
         success: true,
-        data: waterQualityData,
+        data: waterQualityData
       });
     } catch (error) {
-      // Handle any errors and return an error response
       res.status(400).json({
         success: false,
-        error: error.message,
+        error: error.message
       });
     }
   },
