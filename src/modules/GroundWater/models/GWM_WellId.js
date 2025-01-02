@@ -21,15 +21,15 @@ const GWM_WellId = sequelize.define('GWM_WellId', {
   },
   provinceCode: {
     type: DataTypes.STRING(250),
-    allowNull: false,
+    allowNull: true,
   },
   districtCode: {
     type: DataTypes.STRING(250),
-    allowNull: false,
+    allowNull: true,
   },
   projOfficeCode: {
     type: DataTypes.STRING(250),
-    allowNull: false,
+    allowNull: true,
   },
   dsDivision: {
     type: DataTypes.STRING(100),
@@ -145,20 +145,20 @@ const GWM_WellId = sequelize.define('GWM_WellId', {
   timestamps: false, 
 });
 
-// Add foreign key associations
-GWM_WellId.associate = (models) => {
-  GWM_WellId.belongsTo(models.MDM_LocationHierarchy, {
-    foreignKey: 'districtCode',
-    targetKey: 'code',
-  });
-  GWM_WellId.belongsTo(models.MDM_LocationHierarchy, {
-    foreignKey: 'projOfficeCode',
-    targetKey: 'code',
-  });
-  GWM_WellId.belongsTo(models.MDM_LocationHierarchy, {
-    foreignKey: 'provinceCode',
-    targetKey: 'code',
-  });
-};
+// // Add foreign key associations
+// GWM_WellId.associate = (models) => {
+//   GWM_WellId.belongsTo(models.MDM_LocationHierarchy, {
+//     foreignKey: 'districtCode',
+//     targetKey: 'code',
+//   });
+//   GWM_WellId.belongsTo(models.MDM_LocationHierarchy, {
+//     foreignKey: 'projOfficeCode',
+//     targetKey: 'code',
+//   });
+//   GWM_WellId.belongsTo(models.MDM_LocationHierarchy, {
+//     foreignKey: 'provinceCode',
+//     targetKey: 'code',
+//   });
+// };
 
 module.exports = GWM_WellId; 

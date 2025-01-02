@@ -6,6 +6,24 @@ const waterQualityController = {
     try {
       // Destructure data from the request body
       const {
+        collectorName = null,
+        designation = null,
+        prepareDate = null,
+        references = null,
+        region = null,
+        rsc = null,
+        sampleDate = null,
+        sampleGroup = null,
+        sampleNumber = null,
+        samplePointName = null,
+        source = null,
+        time = null,
+        volume = null,
+        weatherCondition = null,
+      } = req.body;
+  
+      // Create a new entry in the database with the provided data
+      const waterQualityData = await WaterQuality.create({
         collectorName,
         designation,
         prepareDate,
@@ -18,26 +36,8 @@ const waterQualityController = {
         samplePointName,
         source,
         time,
-        volume,
-        weatherCondition
-      } = req.body;
-  
-      // Create a new entry in the database, setting defaults for non-required fields
-      const waterQualityData = await WaterQuality.create({
-        collectorName: collectorName || null, // Default to null if not provided
-        designation: designation || null,
-        prepareDate: prepareDate || null,
-        references: references || null,
-        region: region || null,
-        rsc: rsc || null,
-        sampleDate: sampleDate || null,
-        sampleGroup: sampleGroup || null,
-        sampleNumber: sampleNumber || null,
-        samplePointName: samplePointName || null,
-        source: source || null,
-        time: time || null,
-        volume: volume || null,
-        weatherCondition: weatherCondition || null,
+        volume: isNaN(volume) ? null : volume, // Handle NaN for volume
+        weatherCondition,
       });
   
       // Return a success response with the created data
@@ -53,6 +53,7 @@ const waterQualityController = {
       });
     }
   },
+  
   
  
 

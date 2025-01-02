@@ -6,8 +6,8 @@ const WellsController = require("../controllers/WellsController")
 router.post(
   "/addwell",
   async (req, res) => {
-    const { WELLNO, RSCLocation, ScaleGeologyMap, WellType, WellCondition } = req.body;
-    if (!WELLNO || !RSCLocation || !ScaleGeologyMap || !WellType || !WellCondition) {
+    const { WELLNO } = req.body;
+    if (!WELLNO) {
       return res.status(400).json({ error: "Missing required fields!" });
     }
     WellsController.createWell(req,res);
